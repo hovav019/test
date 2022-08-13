@@ -1,7 +1,4 @@
-- name: Create env file
-  vars_files:
-    - group_vars/env
-
+name: Create env file
 
 on:
   pull_request:
