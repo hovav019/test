@@ -1,4 +1,6 @@
-name: upload my image to DockerHub
+- name: upload my image to DockerHub
+  vars_files:
+      - group_vars/env
 
 on:
   pull_request:
@@ -6,6 +8,18 @@ on:
     types:
       - closed
 jobs:
+  prepare:
+    name: Create env file
+    runs-on: ubuntu-latest
+    steps:
+      - name: make docker env file
+      - uses: SpicyPizza/create-envfile@v1.3
+        with:
+          docker_user: ${{ secrets.DOCKER_USER }}
+          docker_token: ${{ secrets.DOCKER_TOKEN }}
+          file_name: docker.env
+          directory: ./group_vars
+
   build:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
@@ -17,11 +31,11 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          username: "{{ docker_user }}"
+          password: "{{ docker_token }}"
 
       - name: Build
-        run: docker build . --tag ${{ secrets.DOCKER_USER }}/calculator:latest
+        run: docker build . --tag {{ docker_user }}/calculator:latest
 
       - name: push to DockerHub
-        run: docker push ${{ secrets.DOCKER_USER }}/calculator:latest
+        run: docker push {{ docker_user }}/calculator:latest
