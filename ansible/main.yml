@@ -1,19 +1,17 @@
-- name: Create the weather application server with site
+- name: Create the calculator application server with site
   hosts: localhost
   connection: local
   gather_facts: False
-  vars_files:
-    - group_vars/docker.env
 
   tasks:
     - name: Login docker
-      shell: docker login -u {{ DOCKER_USER }} -p ${{ DOCKER_TOKEN }}
+      shell: docker login -u {{ docker_user }} -p ${{ docker_token }}
 
     - name: Build image
-      shell: docker build . --tag {{ DOCKER_USER }}/weather:latest
+      shell: docker build . --tag {{ docker_user }}/calculator:latest
 
     - name: Push image to DockerHub
-      shell: docker push {{ DOCKER_USER }}/weather:latest
+      shell: docker push {{ docker_user }}/calculator:latest
 
-    - name: Start weather docker
-      shell: "docker run -d -p 80:3000 -t --restart always --name weather {{ DOCKER_USER }}/weather"
+    - name: Start calculator docker
+      shell: "docker run -d -p 80:3000 -t --restart always --name calculator {{ docker_user }}/calculator"
