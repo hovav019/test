@@ -18,7 +18,7 @@ jobs:
           envkey_DOCKER_USER: ${{ secrets.DOCKER_USER }}
           envkey_DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
           file_name: docker.env
-          directory: "${{ github.repository }}"
+          # directory: "${{ github.repository }}"
 
       # - uses: iamsauravsharma/create-dotenv@v1.2.1
       #   with:
