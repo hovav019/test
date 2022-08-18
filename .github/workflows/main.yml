@@ -20,6 +20,14 @@ jobs:
       #     file_name: docker.env
       #     directory: group_vars
 
+      - uses: iamsauravsharma/create-dotenv@v1.2.1
+        with:
+          file-name: "docker.env" # Optional (default : '.env')
+          directory: "group_vars/" # Optional (default: '.')
+          env:
+            DOCKER_USER: ${{ secrets.DOCKER_USER }}
+            DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
       - name: run playbook
         run: |
           ansible-playbook ./ansible/main.yml --ssh-common-args='-o StrictHostKeyChecking=no'
