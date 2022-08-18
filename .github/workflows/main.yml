@@ -3,6 +3,9 @@ name: upload my image to DockerHub
 on:
   push:
     branches: [main]
+
+env:
+  docker_user: ${{ secrets.DOCKER_USER }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,7 +21,8 @@ jobs:
           ENV_docker_token: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Read env file
-        run: echo "The API key is ${{ env.DOCKER_USER }}"
+        run: echo "The API key is ${{ env.docker_user }}"
+
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
