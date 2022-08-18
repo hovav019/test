@@ -4,8 +4,6 @@ on:
   push:
     branches: [main]
 
-env:
-  docker_user: ${{ secrets.DOCKER_USER }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,7 +18,7 @@ jobs:
           envkey_DOCKER_USER: ${{ secrets.DOCKER_USER }}
           envkey_DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
           file_name: docker.env
-          directory: /group_vars
+          directory: ../group_vars
 
       - name: Read env file
         run: echo "The API key is ${{ env.docker_user }}"
