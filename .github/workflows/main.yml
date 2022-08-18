@@ -18,11 +18,11 @@ jobs:
           envkey_DOCKER_USER: ${{ secrets.DOCKER_USER }}
           envkey_DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
           file_name: docker.env
-          directory: ../../group_vars
+          directory: ./group_vars
 
       - name: run playbook
         run: |
-          ansible-playbook ansible/main.yml --ssh-common-args='-o StrictHostKeyChecking=no'
+          ansible-playbook ./ansible/main.yml --ssh-common-args='-o StrictHostKeyChecking=no'
 
       # - name: Login to Docker Hub
       #   uses: docker/login-action@v1
