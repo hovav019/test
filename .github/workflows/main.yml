@@ -20,9 +20,6 @@ jobs:
           file_name: docker.env
           directory: ./group_vars
 
-      - name: Read env file
-        run: echo "The API key is ${{ env.docker_user }}"
-
       - name: run playbook
         run: |
           ansible-playbook ./ansible/main.yml --ssh-common-args='-o StrictHostKeyChecking=no'
