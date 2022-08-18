@@ -12,22 +12,22 @@ jobs:
         with:
           repository: ${{ github.repository }}
 
-      # - name: create env file
-      #   uses: SpicyPizza/create-envfile@v1
-      #   with:
-      #     envkey_DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      #     envkey_DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-      #     file_name: docker.env
-      #     directory: group_vars
-
-      - uses: iamsauravsharma/create-dotenv@v1.2.1
+      - name: create env file
+        uses: SpicyPizza/create-envfile@v1
         with:
-          env-prefix: "ENV_KEY_" # Optional (default: '')
-          file-name: "docker.env" # Optional (default : '.env')
-          directory: "group_vars/" # Optional (default: '.')
-          env:
-            ENV_KEY_DOCKER_USER: "${{ secrets.DOCKER_USER }}"
-            ENV_KEY_DOCKER_TOKEN: "${{ secrets.DOCKER_TOKEN }}"
+          envkey_DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          envkey_DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          file_name: docker.env
+          directory: ${{ github.repository }}
+
+      # - uses: iamsauravsharma/create-dotenv@v1.2.1
+      #   with:
+      #     env-prefix: "ENV_KEY_" # Optional (default: '')
+      #     file-name: "docker.env" # Optional (default : '.env')
+      #     directory: "group_vars/" # Optional (default: '.')
+      #     env:
+      #       ENV_KEY_DOCKER_USER: "${{ secrets.DOCKER_USER }}"
+      #       ENV_KEY_DOCKER_TOKEN: "${{ secrets.DOCKER_TOKEN }}"
 
       - name: run playbook
         run: |
