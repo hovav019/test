@@ -17,8 +17,7 @@ jobs:
         with:
           envkey_DOCKER_USER: ${{ secrets.DOCKER_USER }}
           envkey_DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-          file_name: docker.env
-          directory: ${{ github.workspace }}/group_vars
+          file_name: docker.env]
 
       - name: run playbook
         run: |
