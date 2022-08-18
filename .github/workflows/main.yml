@@ -26,8 +26,8 @@ jobs:
           file-name: "docker.env" # Optional (default : '.env')
           directory: "group_vars/" # Optional (default: '.')
           env:
-            ENV_KEY_DOCKER_USER: ${{ secrets.DOCKER_USER }}
-            ENV_KEY_DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+            ENV_KEY_DOCKER_USER: "${{ secrets.DOCKER_USER }}"
+            ENV_KEY_DOCKER_TOKEN: "${{ secrets.DOCKER_TOKEN }}"
 
       - name: run playbook
         run: |
